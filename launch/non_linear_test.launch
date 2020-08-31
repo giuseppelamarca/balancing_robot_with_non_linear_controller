@@ -1,0 +1,5 @@
+<launch>
+	<include file="$(find balancing)/launch/balancing_gazebo.launch"/>
+        <node pkg="balancing" type="quat_2_euler.py" name="angle_converter" output="screen"/>
+        <node pkg="balancing" type="non_linear.py" name="controller" output="screen"/>
+</launch>

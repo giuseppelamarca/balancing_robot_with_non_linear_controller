@@ -1,0 +1,8 @@
+<launch>
+	<rosparam command="load" file="$(find balancing)/config/pid_gain.yaml"/>
+
+	<param name="model_path" command="$(find xacro)/xacro.py $(find balancing)/urdf/robot.urdf.xacro"/>
+        <include file="$(find gazebo_ros)/launch/empty_world.launch"/> 
+	<node name="balancing_gazebo_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
+		args="-urdf -x 0 -y 0 -z 0.079 -R 0 -P 0.01 -Y 0 -model self_balancing_robot -param model_path"/>
+</launch>

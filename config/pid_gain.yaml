@@ -1,0 +1,9 @@
+control/p: 1
+control/i: 12
+control/d: 0
+
+moving/p: 0.02
+moving/i: 0.001
+moving/d: 0.5
+
+pos: 0.1
