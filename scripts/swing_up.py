@@ -85,7 +85,6 @@ def controller():
     rospy.sleep(3)
     rospy.loginfo("start control loop")
     reset_world = False
-    swing_up()
     pitch_old = pitch
     d_pitch = 0
     swing_up()
@@ -129,7 +128,7 @@ def controller():
         ctrl_pub.linear.x = -control
         error_pub.publish(Float64(e))
         pub.publish(ctrl_pub)
-        rospy.sleep(0.001)
+        rospy.sleep(0.005) #increasing the time from 0.001 to 0.005 i got a better result during the passage from swing_up to linear control
 
 if __name__ == '__main__':
     try:

@@ -3,7 +3,7 @@
 
 	<param name="model_path" command="$(find xacro)/xacro.py $(find balancing)/urdf/robot.urdf.xacro"/>
         <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
-		<arg name="gui" value="false"/>
+		<arg name="gui" value="true"/>
 	</include>
 
 	<node name="balancing_gazebo_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" 
