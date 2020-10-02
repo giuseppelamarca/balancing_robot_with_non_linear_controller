@@ -13,7 +13,7 @@
 
 <xacro:property name="battery_w" value="0.1"/>
 <xacro:property name="battery_h" value="0.02"/>
-<xacro:property name="battery_l" value=".14"/>
+<xacro:property name="battery_l" value=".12"/>
 <xacro:property name="battery_weight" value="0.15"/>
 
 <xacro:property name="Mot_l" value="0.07"/>
@@ -140,8 +140,8 @@
     </link>
 
   <gazebo reference="battery_link">
-    <mu1>0.3</mu1>
-    <mu2>0.3</mu2>
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
     <kp>10000</kp>
     <kd>10000</kd>
     <material>Gazebo/Green</material>

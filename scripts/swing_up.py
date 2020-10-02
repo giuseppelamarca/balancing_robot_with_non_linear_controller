@@ -23,13 +23,23 @@ old_time = 0
 
 ctrl_pub = Twist()
 pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+rospy.set_param("reset_simulation",0)
 
 def reset_simulation():
+    rospy.loginfo("simulation resetted")
     global e_int, e_old, em_int, em_old, old_time
     e_int = 0
     e_old = 0
     em_old = 0
     em_int = 0
+    rospy.wait_for_service("/gazebo/reset_world")
+    rospy.wait_for_service("/gazebo/reset_simulation")
+    rospy.wait_for_service("/gazebo/get_model_state")
+    gazebo_service = rospy.ServiceProxy("/gazebo/reset_world", Empty)
+    rospy.ServiceProxy("/gazebo/reset_simulation", Empty)
+    robot_pose = rospy.ServiceProxy("/gazebo/get_model_state", GetModelState)
+    rospy.set_param("reset_simulation",0)
+    rospy.sleep(0.05)
 
 
 def callback(rpy):
@@ -41,10 +51,13 @@ def odom_callback(o):
     odom = o.pose.pose.position.x
 
 def swing_up():
+    ctrl_pub.linear.x =  0 
+    pub.publish(ctrl_pub)
+    rospy.sleep(1.5)
     if pitch > 0:
-        u = -0.85
+        u = -1.2
     else:
-        u = 0.85
+        u = 1.2
     ctrl_pub.linear.x =  u 
     pub.publish(ctrl_pub)
     rospy.sleep(2)
@@ -61,10 +74,7 @@ def controller():
     rospy.Subscriber("odom", Odometry, odom_callback)
     rospy.Subscriber("rpy", Vector3, callback)
 
-    rospy.wait_for_service("/gazebo/reset_world")
-    rospy.wait_for_service("/gazebo/get_model_state")
-    gazebo_service = rospy.ServiceProxy("/gazebo/reset_world", Empty)
-    robot_pose = rospy.ServiceProxy("/gazebo/get_model_state", GetModelState)
+    reset_simulation()
 
     old_time = rospy.get_time()
     odom_old = 0
@@ -73,16 +83,22 @@ def controller():
     d_pitch_old = 0
     r = 0     #reference signal in non linear control
     rospy.sleep(3)
+    rospy.loginfo("start control loop")
+    reset_world = False
+    swing_up()
+    pitch_old = pitch
+    d_pitch = 0
+    swing_up()
+    control = -1.2
+    while(pitch<-0.4):
+        pub.publish(ctrl_pub)
+    old_time = rospy.get_time()
     while not rospy.is_shutdown():
-  # check if the robot is falling
-        if abs(pitch) > 1:
-            swing_up()
-            while abs(pitch)>0.2:
-                pass
-            old_time = rospy.get_time()
         K = rospy.get_param('control')
         Km = rospy.get_param('moving')
         delta_time = (rospy.get_time() - old_time)
+	if delta_time==0:
+		delta_time = 0.001
         old_time = rospy.get_time()
 
         # moving control 
@@ -97,12 +113,19 @@ def controller():
             reference = -0.1
 
         # balancing control 
-        e = reference - pitch
+        e = - pitch
         e_dot = (e - e_old)/delta_time
         e_old = e
-        e_int += e * delta_time
-        control = e * K['p'] + e_int * K['i'] + e_dot * K['d']
-
+	if abs(control)<=1.5:
+		e_int += e * delta_time
+        #control = e * K['p'] + e_int * K['i'] + e_dot * K['d']
+        control = e * K['p'] + e_int * K['i'] 
+	'''
+	if control< -1.2:
+		control = -1.2
+	elif control > 1.2:
+		control = 1.2
+	'''
         ctrl_pub.linear.x = -control
         error_pub.publish(Float64(e))
         pub.publish(ctrl_pub)

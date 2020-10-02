@@ -1,0 +1,54 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Ib	non_linear.py	/^Ib = 0.002$/;"	v
+Ib	swing_up.py	/^Ib = 0.002$/;"	v
+callback	control_pid.py	/^def callback(rpy):$/;"	f
+callback	non_linear.py	/^def callback(rpy):$/;"	f
+callback	quat_2_euler.py	/^def callback(data): $/;"	f
+callback	swing_up.py	/^def callback(rpy):$/;"	f
+callback	test.py	/^def callback(rpy):$/;"	f
+controller	control_pid.py	/^def controller():$/;"	f
+controller	non_linear.py	/^def controller():$/;"	f
+controller	swing_up.py	/^def controller():$/;"	f
+controller	test.py	/^def controller():$/;"	f
+ctrl_pub	swing_up.py	/^ctrl_pub = Twist()$/;"	v
+e_int	control_pid.py	/^e_int = 0$/;"	v
+e_int	non_linear.py	/^e_int = 0$/;"	v
+e_int	swing_up.py	/^e_int = 0$/;"	v
+e_old	control_pid.py	/^e_old = 0$/;"	v
+e_old	non_linear.py	/^e_old = 0$/;"	v
+e_old	swing_up.py	/^e_old = 0$/;"	v
+em_int	control_pid.py	/^em_int = 0$/;"	v
+em_int	non_linear.py	/^em_int = 0$/;"	v
+em_int	swing_up.py	/^em_int = 0$/;"	v
+em_old	control_pid.py	/^em_old = 0$/;"	v
+em_old	non_linear.py	/^em_old = 0$/;"	v
+em_old	swing_up.py	/^em_old = 0$/;"	v
+g	non_linear.py	/^g = -9.81$/;"	v
+g	swing_up.py	/^g = -9.81$/;"	v
+l	non_linear.py	/^l = 0.07$/;"	v
+l	swing_up.py	/^l = 0.12$/;"	v
+mb	non_linear.py	/^mb = 0.3$/;"	v
+mb	swing_up.py	/^mb = 0.3$/;"	v
+odom_callback	control_pid.py	/^def odom_callback(o):$/;"	f
+odom_callback	non_linear.py	/^def odom_callback(o):$/;"	f
+odom_callback	swing_up.py	/^def odom_callback(o):$/;"	f
+old_time	control_pid.py	/^old_time = 0$/;"	v
+old_time	non_linear.py	/^old_time = 0$/;"	v
+old_time	swing_up.py	/^old_time = 0$/;"	v
+pitch	control_pid.py	/^pitch = 0$/;"	v
+pitch	non_linear.py	/^pitch = 0$/;"	v
+pitch	swing_up.py	/^pitch = 0$/;"	v
+pitch	test.py	/^pitch = 0 $/;"	v
+pub	quat_2_euler.py	/^pub = rospy.Publisher('rpy', Vector3, queue_size=10)$/;"	v
+pub	swing_up.py	/^pub = rospy.Publisher('\/cmd_vel', Twist, queue_size=10)$/;"	v
+quat_2_rpy	quat_2_euler.py	/^def quat_2_rpy():$/;"	f
+reset_simulation	control_pid.py	/^def reset_simulation():$/;"	f
+reset_simulation	non_linear.py	/^def reset_simulation():$/;"	f
+reset_simulation	swing_up.py	/^def reset_simulation():$/;"	f
+rpy	quat_2_euler.py	/^rpy = Vector3()$/;"	v
+swing_up	swing_up.py	/^def swing_up():$/;"	f

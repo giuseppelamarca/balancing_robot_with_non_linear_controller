@@ -47,7 +47,7 @@ def controller():
     robot_pose = rospy.ServiceProxy("/gazebo/get_model_state", GetModelState)
 
     old_time = rospy.get_time()
-    rospy.sleep(1)
+    rospy.sleep(0.5)
     while not rospy.is_shutdown():
         '''
         # check if the robot is moving too faraway (remove when the robot is perfect balanced
@@ -65,9 +65,9 @@ def controller():
         # check if the robot is falling
         if abs(pitch) > 1:
             reset_simulation()
-	    old_time = rospy.get_time()
-	    gazebo_service(EmptyRequest())
-	    rospy.sleep(0.5)
+            old_time = rospy.get_time()
+            gazebo_service(EmptyRequest())
+            rospy.sleep(0.05)
 
         K = rospy.get_param('control')
         Km = rospy.get_param('moving')
@@ -86,7 +86,7 @@ def controller():
             reference = -0.1
 
         # balancing control 
-        e = reference - pitch
+        e = 0 - pitch
         e_dot = (e - e_old)/delta_time
         e_old = e
         e_int += e * delta_time
